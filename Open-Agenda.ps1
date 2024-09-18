@@ -14,6 +14,7 @@ function Open-Agenda {
 #> 
 	$App = New-Object Agenda
 	$App.Open()
+ 	Exit
 }
 
 function Add-EventWrapper {
