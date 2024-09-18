@@ -15,4 +15,4 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build PowerShell app
         shell: pwsh
-        run: .\Driver.ps1
+        run: .\Driver.ps1 -Task ModuleBuild
