@@ -14,5 +14,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build PowerShell app
-        shell: pwsh
         run: ./Driver.ps1
+        shell: pwsh
