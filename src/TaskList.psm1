@@ -33,7 +33,7 @@ class TaskList {
 
 	TaskList() {
 		$this.Name = ""
-		$this.Tasks = New-Object List[Task]
+		$this.Tasks = [List[Task]]::new()
 	}
 
 	[String] GetName() {

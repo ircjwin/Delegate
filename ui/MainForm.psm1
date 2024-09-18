@@ -81,11 +81,8 @@ class MainForm: Form {
     }
 }
 
-# [Form] SetMainForm() {
-#     $NewForm.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
-#     $Newform.add_FormClosing( (Add-EventWrapper -Method $this.MainForm_FormClosing -SendArgs) )
-#     return $NewForm
-# }
+
+# NewForm.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
 
 # $this.TaskDetailsForm = $this.SetTaskDetailsForm()
 # $this.SettingsForm = $this.SetSettingsForm()

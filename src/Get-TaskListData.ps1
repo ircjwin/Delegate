@@ -1,12 +1,17 @@
+using namespace System.Collections.Generic
+using namespace System.Management.Automation
+using namespace System.Windows.Forms
+using namespace System.Drawing
+
 using module '.\TaskList.psm1'
 
-$SaveDataPath = "$($PSScriptRoot)\Save.json"
 
 function Get-TaskListData {
     param (
         [Parameter()]
         [String] $DefaultName
     )
+    $SaveDataPath = "$($PSScriptRoot)\..\Save.json"
     $FileExists = Test-Path -Path $SaveDataPath
     If ($FileExists -eq $False) {
         $NewTaskList = New-Object TaskList

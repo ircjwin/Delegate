@@ -23,7 +23,9 @@ class ListViewBuilder: ListView {
         $this.Columns.Add("", -1)
         $this.CheckBoxes = $True
         $this.Font = New-Object Font("Segoe UI", 12, [FontStyle]::Regular)
-        $this.Items.AddRange($TaskDescList)
+        if ($TaskDescList) {
+            $this.Items.AddRange($TaskDescList)
+        }
     }
 }
 

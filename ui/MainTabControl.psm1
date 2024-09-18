@@ -35,7 +35,7 @@ class MainTabControl: TabControl {
         $this.AddTabPage = New-Object TabPage
         $this.AddTabPage.Text = "   +"
 
-        $this.TaskListData = Get-TaskListData -DefaultName $this.DefaultTabTitle
+        $this.TaskListData = (Get-TaskListData -DefaultName $this.DefaultTabTitle)
 
         $this.add_SelectedIndexChanged( (Add-EventWrapper -Method $this.MainTabControl_SelectedIndexChanged) )
         $this.add_Deselected( (Add-EventWrapper -Method $this.MainTabControl_Deselected -SendArgs) )
@@ -48,7 +48,7 @@ class MainTabControl: TabControl {
         foreach ($TaskList in $this.TaskListData) {
             $NewTab = New-Object TabPage
             $NewTab.Text = $TaskList.GetName()
-            $TaskDescList = $TaskList | ForEach-Object { $_.GetDesc() }
+            $TaskDescList = $TaskList.Tasks | ForEach-Object { $_.GetDesc() }
             $NewListView = New-Object ListViewBuilder($this.TabControlHeight, $this.TabControlWidth, $TaskDescList)
             $NewTab.Controls.Add($NewListView)
             # $NewTab.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
