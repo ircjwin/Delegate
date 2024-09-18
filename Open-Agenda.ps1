@@ -458,7 +458,6 @@ class Agenda {
 		$NewTextBox = New-Object TextBox
 		$NewTextBox.Location = New-Object Point( $this.AddTaskTextBoxX, $this.AddTaskTextBoxY )
 		$NewTextBox.Size = New-Object Size( $this.AddTaskTextBoxWidth, $this.AddTaskTextBoxHeight )
-		$NewTextBox.ContextMenu = New-Object ContextMenu
 		$NewTextBox.add_KeyDown( (Add-EventWrapper -Method $this.AddTaskTextBox_KeyDown -SendArgs) )
 		return $NewTextBox
 	}
