@@ -10,7 +10,7 @@ class ListViewBuilder: ListView {
     [int] $ListViewX
     [int] $ListViewY
 
-    ListViewBuilder([int] $TabControlHeight, [int] $TabControlWidth) {
+    ListViewBuilder([int] $TabControlHeight, [int] $TabControlWidth, [List[string]] $TaskDescList) {
         $this.ListViewHeight = $TabControlHeight - 60
         $this.ListViewWidth = $TabControlWidth
         $this.ListViewX = 0
@@ -23,26 +23,12 @@ class ListViewBuilder: ListView {
         $this.Columns.Add("", -1)
         $this.CheckBoxes = $True
         $this.Font = New-Object Font("Segoe UI", 12, [FontStyle]::Regular)
+        $this.Items.AddRange($TaskDescList)
     }
 }
 
 
-# [ListView] SetListView([List[Task]] $NewTaskList) {
-#     $NewListView = New-Object ListView
-#     $NewListView.LabelEdit = $true
-#     $NewListView.View = "Details"
-#     $NewListView.HeaderStyle = "None"
-#     $NewListView.Columns.Add("", -1)
-#     $NewListView.CheckBoxes = $True
-#     $NewListView.Size = New-Object Size($this.ListViewWidth, $this.ListViewHeight)
-#     $NewListView.Location = New-Object Point($this.ListViewX, $this.ListViewY)
-#     $NewListView.Font = New-Object Font("Segoe UI", 12, [FontStyle]::Regular)
-#     foreach ($Task in $NewTaskList) {
-#         $NewListView.Items.Add( ($Task.GetDesc()) )
-#     }
-#     $NewListView.add_AfterLabelEdit( (Add-EventWrapper -Method $this.ListView_AfterLabelEdit -SendArgs) )
-#     return $NewListView
-# }
+# $NewListView.add_AfterLabelEdit( (Add-EventWrapper -Method $this.ListView_AfterLabelEdit -SendArgs) )
 
 # [Void] ListView_AfterLabelEdit([Object] $s, [EventArgs] $e) {
 #     $s.Items[$e.Item].Text = $e.Label.Trim()
@@ -58,8 +44,3 @@ class ListViewBuilder: ListView {
 #     $e.CancelEdit = $true
 #     $e.Handled = $true
 # }
-
-# $this.ListViewHeight = $this.TabControlHeight - 60
-# $this.ListViewWidth = $this.TabControlWidth
-# $this.ListViewX = 0
-# $this.ListViewY = 32

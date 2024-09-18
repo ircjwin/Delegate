@@ -5,7 +5,6 @@ using namespace System.Drawing
 
 
 class AddTaskTextBox: TextBox {
-
     [int] $AddTaskTextBoxWidth
     [int] $AddTaskTextBoxHeight
     [int] $AddTaskTextBoxX

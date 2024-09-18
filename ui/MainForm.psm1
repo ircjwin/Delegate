@@ -16,6 +16,9 @@ class MainForm: Form {
     [AddTaskTextBox] $AddTaskTextBox # Probably not needed as class property
     [MainTabControl] $MainTabControl
     [DeleteTaskListButton] $DeleteTaskListButton
+    [String] $UnsavedTitle
+    [String] $UnsavedMSg
+    [Boolean] $IsSaved
 
     MainForm() {
         $this.Height = 800
@@ -23,6 +26,9 @@ class MainForm: Form {
         $this.Name = "MainForm"
         $this.Text = "Delegate"
         $this.StartPosition = [FormStartPosition]::CenterScreen
+        $this.UnsavedTitle = "Unsaved Changes"
+        $this.UnsavedMsg = "Unsaved changes will be lost. Continue without saving?"
+        $this.IsSaved = $True
 
         $UncheckAllButton = New-Object UncheckAllButton
         $CheckAllButton = New-Object CheckAllButton
@@ -41,6 +47,7 @@ class MainForm: Form {
         $this.Controls.Add($UncheckAllButton)
 
         $this.add_Shown( (Add-EventWrapper -Method $this.MainForm_Shown) )
+        $this.add_FormClosing( (Add-EventWrapper -Method $this.MainForm_FormClosing -SendArgs) )
     }
 
     [Void] Open() {
@@ -62,6 +69,16 @@ class MainForm: Form {
             $this.DeleteTaskListButton.Relocate()
         }
     }
+
+    [Void] MainForm_FormClosing([Object] $s, [EventArgs] $e) {
+        if ($this.IsSaved -eq $False) {
+            $MsgBtns = [MessageBoxButtons]::YesNo
+            $Result = [MessageBox]::Show($this.UnsavedMsg, $this.UnsavedTitle, $MsgBtns)
+            if ($Result -eq [DialogResult]::No) {
+                $e.Cancel = $True
+            }
+        }
+    }
 }
 
 # [Form] SetMainForm() {
@@ -69,21 +86,6 @@ class MainForm: Form {
 #     $Newform.add_FormClosing( (Add-EventWrapper -Method $this.MainForm_FormClosing -SendArgs) )
 #     return $NewForm
 # }
-
-# [Void] MainForm_FormClosing([Object] $s, [EventArgs] $e) {
-#     if ($this.IsSaved -eq $False) {
-#         $MsgBtns = [MessageBoxButtons]::YesNo
-#         $Result = [MessageBox]::Show($this.UnsavedMsg, $this.UnsavedTitle, $MsgBtns)
-#         if ($Result -eq [DialogResult]::No) {
-#             $e.Cancel = $True
-#         }
-#     }
-# }
-
-# $this.UnsavedTitle = "Unsaved Changes"
-# $this.UnsavedMsg = "Unsaved changes will be lost. Continue without saving?"
-
-# $this.IsSaved = $True
 
 # $this.TaskDetailsForm = $this.SetTaskDetailsForm()
 # $this.SettingsForm = $this.SetSettingsForm()

@@ -3,6 +3,7 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
+
 function Get-DefaultBrowser
 {
 <#
@@ -45,26 +46,27 @@ function Get-DefaultBrowser
 	return $DefaultBrowserPath
 }
 
-[Form] SetTaskDetailsForm() {
-    $NewForm = New-Object Form
-    $NewForm.StartPosition = [FormStartPosition]::CenterParent
-    $NewForm.Size = New-Object Size(200, 100)
-    $NewForm.Text = "Task Details"
+class TaskDetailsForm: Form {
+    TaskDetailsForm() {
+        $this.StartPosition = [FormStartPosition]::CenterParent
+        $this.Size = New-Object Size(400, 200)
+        $this.Location = New-Object Point(0, 0)
+        $this.Text = "Task Details"
 
-    $NewLabel = New-Object Label
-    $this.WebpageTextBox = New-Object TextBox
-    $NewCloseButton = New-Object Button
-    $NewForm.Size = New-Object Size(400, 200)
-    $NewLabel.Width = 200
-    $this.WebpageTextBox.Width = 370
-    $NewLabel.Height = 18
-    $NewForm.Location = New-Object Point(0, 0)
-    $NewLabel.Location = New-Object Point(10, 63)
-    $this.WebpageTextBox.Location = New-Object Point(10, 83)
-    $NewCloseButton.Location = New-Object Point(170, 113)
-    $NewForm.Text = "Task Details"
-    $NewLabel.Text = "Webpages:"
-    $NewCloseButton.Text = "Close"
-    $NewForm.Controls.AddRange( @($NewLabel, $this.WebpageTextBox) )
-    return $NewForm
+        $NewLabel = New-Object Label
+        $NewLabel.Width = 200
+        $NewLabel.Height = 18
+        $NewLabel.Location = New-Object Point(10, 63)
+        $NewLabel.Text = "Webpages:"
+
+        $WebpageTextBox = New-Object TextBox
+        $WebpageTextBox.Width = 370
+        $WebpageTextBox.Location = New-Object Point(10, 83)
+
+        $NewCloseButton = New-Object Button
+        $NewCloseButton.Location = New-Object Point(170, 113)
+        $NewCloseButton.Text = "Close"
+
+        $this.Controls.AddRange( @($NewLabel, $WebpageTextBox) )
+    }
 }

@@ -5,8 +5,13 @@ using namespace System.Drawing
 
 
 class MainMenuStrip: MenuStrip {
+    [String] $SaveTitle
+    [String] $SaveMsg
 
     MainMenuStrip() {
+        $this.SaveTitle = "Save"
+        $this.SaveMsg = "Save changes?"
+
         $File = New-Object ToolStripMenuItem
         $Save = New-Object ToolStripMenuItem
         $Settings = New-Object ToolStripMenuItem
@@ -31,11 +36,8 @@ class MainMenuStrip: MenuStrip {
 #         $this.SettingsForm.ShowDialog($this.MainForm) | Out-Null
 #     }
 #     $Settings.add_Click( (Add-EventWrapper -ScriptBlock $SettingsHandler) )
-#     $Close.add_Click( (Add-EventWrapper -Method $this.CloseToolStripMenuItem_Click) )
 #     return $NewMenuStrip
 # }
-
-
 
 # [Void] SaveToolStripMenuItem_Click() {
 #     $MsgBtns = [MessageBoxButtons]::YesNo
@@ -45,6 +47,3 @@ class MainMenuStrip: MenuStrip {
 #     }
 #     $this.IsSaved = $True
 # }
-
-# $this.SaveTitle = "Save"
-# $this.SaveMsg = "Save changes?"
