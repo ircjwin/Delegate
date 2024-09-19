@@ -1,5 +1,8 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-. "$($PSScriptRoot)\Open-Agenda.ps1"
-Exit
+. "$($PSScriptRoot)\src\Add-EventWrapper.ps1"
+. "$($PSScriptRoot)\src\Get-DefaultBrowser.ps1"
+. "$($PSScriptRoot)\src\TaskList.ps1"
+. "$($PSScriptRoot)\src\Get-TaskListData.ps1"
+. "$($PSScriptRoot)\src\Open-Agenda.ps1"
