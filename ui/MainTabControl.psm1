@@ -5,6 +5,7 @@ using namespace System.Drawing
 
 using module ".\ListViewBuilder.psm1"
 using module '..\src\TaskList.psm1'
+using module '.\RenameTextBox.psm1'
 
 
 class MainTabControl: TabControl {
@@ -18,6 +19,7 @@ class MainTabControl: TabControl {
     [string] $DefaultTabTitle
     [TabPage] $AddTabPage
     [List[TaskList]] $TaskListData
+    [Boolean] $IsNew
 
     MainTabControl([int] $FormHeight, [int] $FormWidth) {
         $this.TabControlHeight = $FormHeight - 100
@@ -34,6 +36,7 @@ class MainTabControl: TabControl {
 
         $this.AddTabPage = New-Object TabPage
         $this.AddTabPage.Text = "   +"
+        $this.IsNew = $False
 
         $this.TaskListData = (Get-TaskListData -DefaultName $this.DefaultTabTitle)
 
@@ -42,6 +45,7 @@ class MainTabControl: TabControl {
         $this.add_DoubleClick( (Add-EventWrapper -Method $this.MainTabControl_DoubleClick) )
 
         $this.TabPageBuilder()
+        $this.Controls.Add($this.AddTabPage)
     }
 
     [void] TabPageBuilder() {
@@ -60,26 +64,24 @@ class MainTabControl: TabControl {
         $CurrentTab = $this.SelectedTab
         if ($CurrentTab -eq $this.AddTabPage) {
             $this.Parent.DeleteTaskListButton.Visible = $False
-            # $this.IsNew = $True
+            $this.IsNew = $True
             $NewTabPage = New-Object TabPage
             $NewTabPage.Text = $this.UnnamedCategory
-            # $NewListView = $this.SetListView( @() )
-            # $NewTabPage.Controls.Add($NewListView)
+            $NewListView = New-Object ListViewBuilder($this.TabControlHeight, $this.TabControlWidth, @())
+            $NewTabPage.Controls.Add($NewListView)
             # $NewTabPage.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
             $this.TabPages.Insert( ($this.Controls.Count - 1), $NewTabPage )
             $this.SelectedTab = $NewTabPage
-            # $CurrentIndex = $this.SelectedIndex
-            # $Rect = $this.GetTabRect($CurrentIndex)
-            # $RenameTextBox = New-Object TextBox
-            # $RenameTextBox.Location = New-Object Point( ($Rect.X + $this.TabControlX), ($Rect.Y + $this.TabControlY) )
-            # $RenameTextBox.Size = New-Object Size($Rect.Size)
-            # $RenameTextBox.Text = $NewTabPage.Text.Trim()
-            # $RenameTextBox.add_KeyDown( (Add-EventWrapper -Method $this.RenameTextBox_KeyDown -SendArgs) )
-            # $RenameTextBox.add_Leave( (Add-EventWrapper -Method $this.RenameTextBox_Leave -SendArgs) )
-            # $this.Parent.Controls.Add($RenameTextBox)
-            # $RenameTextBox.BringToFront()
-            # $RenameTextBox.Focus()
-            # $RenameTextBox.SelectAll()
+            $CurrentIndex = $this.SelectedIndex
+            $Rect = $this.GetTabRect($CurrentIndex)
+            $RenameTextBox = New-Object RenameTextBox
+            $RenameTextBox.Location = New-Object Point( ($Rect.X + $this.TabControlX), ($Rect.Y + $this.TabControlY) )
+            $RenameTextBox.Size = New-Object Size($Rect.Size)
+            $RenameTextBox.Text = $NewTabPage.Text.Trim()
+            $this.Parent.Controls.Add($RenameTextBox)
+            $RenameTextBox.BringToFront()
+            $RenameTextBox.Focus()
+            $RenameTextBox.SelectAll()
         } else {
             $CurrentTab.Text = $CurrentTab.Text + $this.SelectedTabWhitespace
             $this.Parent.DeleteTaskListButton.Relocate()
@@ -94,21 +96,17 @@ class MainTabControl: TabControl {
     }
 
     [Void] MainTabControl_DoubleClick() {
-        # $this.DeleteCategoryButton.Visible = $False
+        $this.DeleteTaskListButton.Visible = $False
         $CurrentTab = $this.SelectedTab
         $CurrentIndex = $this.SelectedIndex
         $Rect = $this.GetTabRect($CurrentIndex)
-        # $RenameTextBox = New-Object TextBox
-        # $RenameTextBox.Location = New-Object Point( ($Rect.X + $this.TabControlX), ($Rect.Y + $this.TabControlY) )
-        # $RenameTextBox.Size = New-Object Size($Rect.Size)
-        # $RenameTextBox.Text = $CurrentTab.Text.Trim()
-        # $RenameTextBox.add_KeyDown( (Add-EventWrapper -Method $this.RenameTextBox_KeyDown -SendArgs) )
-        # $RenameTextBox.add_Leave( (Add-EventWrapper -Method $this.RenameTextBox_Leave -SendArgs) )
-        # $this.MainForm.Controls.Add($RenameTextBox)
-        # $RenameTextBox.BringToFront()
-        # $RenameTextBox.Focus()
-        # $RenameTextBox.SelectAll()
+        $RenameTextBox = New-Object RenameTextBox
+        $RenameTextBox.Location = New-Object Point( ($Rect.X + $this.TabControlX), ($Rect.Y + $this.TabControlY) )
+        $RenameTextBox.Size = New-Object Size($Rect.Size)
+        $RenameTextBox.Text = $CurrentTab.Text.Trim()
+        $this.Parent.Controls.Add($RenameTextBox)
+        $RenameTextBox.BringToFront()
+        $RenameTextBox.Focus()
+        $RenameTextBox.SelectAll()
     }
 }
-
-# $this.IsNew = $False

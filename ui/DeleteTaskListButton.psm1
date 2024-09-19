@@ -40,19 +40,19 @@ class DeleteTaskListButton: Button {
             if ($this.Parent.MainTabControl.Controls.Count -eq 2) {
                 $CurrentTab = $this.Parent.MainTabControl.SelectedTab
                 $CurrentTab.Text = $this.Parent.MainTabControl.DefaultCategory + $this.Parent.MainTabControl.SelectedTabWhitespace
-                # $CurrentTab.Controls[0].Clear()
+                $CurrentTab.Controls[0].Clear()
                 $this.Relocate()
-                # $this.AddTaskTextBox.Select()
-                # $this.AgendaData[0].SetName($this.DefaultCategory)
-                # $this.AgendaData[0].ClearTasks()
+                $this.Parent.AddTaskTextBox.Select()
+                $this.Parent.MainTabControl.TaskListData[0].SetName($this.Parent.MainTabControl.DefaultTabTitle)
+                $this.Parent.MainTabControl.TaskListData[0].ClearTasks()
             } else {
                 if ($CurrentIndex -gt 0) {
                     $this.Parent.MainTabControl.SelectedIndex = ($CurrentIndex - 1)
                 }
                 $this.Parent.MainTabControl.Controls.RemoveAt($CurrentIndex)
-                # $this.AgendaData.RemoveAt($CurrentIndex)
+                $this.Parent.MainTabControl.TaskListData.RemoveAt($CurrentIndex)
             }
-            # $this.IsSaved = $False
+            $this.Parent.IsSaved = $False
         }
     }
 }

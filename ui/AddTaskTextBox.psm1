@@ -3,6 +3,8 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
+using module '..\src\TaskList.psm1'
+
 
 class AddTaskTextBox: TextBox {
     [int] $AddTaskTextBoxWidth
@@ -32,15 +34,15 @@ class AddTaskTextBox: TextBox {
             $this.Clear()
             $e.SuppressKeyPress = $True
             $e.Handled = $True
-            # foreach ($Category in $this.AgendaData) {
-            #     if ( ($CurrentTab.Text.Trim()) -eq ($Category.GetName()) ) {
-            #         $NewTask = New-Object Task
-            #         $NewTask.SetDesc($TaskText)
-            #         $Category.AddTask($NewTask)
-            #         $this.IsSaved = $False
-            #         Break
-            #     }
-            # }
+            foreach ($TaskList in $this.Parent.MainTabControl.TaskListData) {
+                if ( ($CurrentTab.Text.Trim()) -eq ($TaskList.GetName()) ) {
+                    $NewTask = New-Object Task
+                    $NewTask.SetDesc($TaskText)
+                    $TaskList.AddTask($NewTask)
+                    $this.Parent.IsSaved = $False
+                    Break
+                }
+            }
         }
     }
 }

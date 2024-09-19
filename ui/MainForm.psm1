@@ -10,15 +10,19 @@ using module ".\MainTabControl.psm1"
 using module ".\AddTaskTextBox.psm1"
 using module ".\MainMenuStrip.psm1"
 using module ".\DeleteTaskListButton.psm1"
+using module '.\SettingsForm.psm1'
+using module '.\TaskDetailsForm.psm1'
 
 
 class MainForm: Form {
-    [AddTaskTextBox] $AddTaskTextBox # Probably not needed as class property
+    [AddTaskTextBox] $AddTaskTextBox
     [MainTabControl] $MainTabControl
     [DeleteTaskListButton] $DeleteTaskListButton
     [String] $UnsavedTitle
     [String] $UnsavedMSg
     [Boolean] $IsSaved
+    [SettingsForm] $SettingsForm
+    [TaskDetailsForm] $TaskDetailsForm
 
     MainForm() {
         $this.Height = 800
@@ -37,6 +41,8 @@ class MainForm: Form {
         $this.DeleteTaskListButton = New-Object DeleteTaskListButton
         $this.MainTabControl = New-Object MainTabControl($this.Height, $this.Width)
         $this.AddTaskTextBox = New-Object AddTaskTextBox($this.MainTabControl.Size, $this.MainTabControl.Location)
+        $this.SettingsForm = New-Object SettingsForm
+        $this.TaskDetailsForm = New-Object TaskDetailsForm
 
         $this.Controls.Add($this.AddTaskTextBox)
         $this.Controls.Add($this.MainTabControl)
@@ -45,6 +51,8 @@ class MainForm: Form {
         $this.Controls.Add($DeleteTaskButton)
         $this.Controls.Add($CheckAllButton)
         $this.Controls.Add($UncheckAllButton)
+        # $this.Controls.Add($this.SettingsForm)
+        # $this.Controls.Add($this.TaskDetailsForm)
 
         $this.add_Shown( (Add-EventWrapper -Method $this.MainForm_Shown) )
         $this.add_FormClosing( (Add-EventWrapper -Method $this.MainForm_FormClosing -SendArgs) )
@@ -52,7 +60,7 @@ class MainForm: Form {
 
     [Void] Open() {
         $this.ShowDialog() | Out-Null
-        # $this.SettingsForm.Dispose()
+        $this.SettingsForm.Dispose()
         $this.Dispose()
     }
 
@@ -81,8 +89,4 @@ class MainForm: Form {
     }
 }
 
-
 # NewForm.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
-
-# $this.TaskDetailsForm = $this.SetTaskDetailsForm()
-# $this.SettingsForm = $this.SetSettingsForm()

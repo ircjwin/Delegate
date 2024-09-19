@@ -22,28 +22,26 @@ class MainMenuStrip: MenuStrip {
         $Close.Text = "Close"
         $this.Items.Add($File)
         $File.DropDownItems.AddRange( @($Save, $Settings, $Close) )
+        $Save.add_Click( (Add-EventWrapper -Method $this.SaveToolStripMenuItem_Click) )
+        $Settings.add_Click( (Add-EventWrapper -Method $this.SettingsToolStripMenuItem_Click) )
         $Close.add_Click( (Add-EventWrapper -Method $this.CloseToolStripMenuItem_Click) )
+    }
+
+    [Void] SaveToolStripMenuItem_Click() {
+        $SaveDataPath = "$($PSScriptRoot)\..\Save.json"
+        $MsgBtns = [MessageBoxButtons]::YesNo
+        $Result = [MessageBox]::Show($this.SaveMsg, $this.SaveTitle, $MsgBtns)
+        if ($Result -eq [DialogResult]::Yes) {
+            $this.Parent.MainTabControl.TaskListData | ConvertTo-Json -Depth 3 | Set-Content -Path $SaveDataPath
+        }
+        $this.Parent.IsSaved = $True
+    }
+
+    [Void] SettingsToolStripMenuItem_Click() {
+        $this.Parent.SettingsForm.ShowDialog($this.Parent) | Out-Null
     }
 
     [Void] CloseToolStripMenuItem_Click() {
         $this.Parent.Close()
     }
 }
-
-# [MenuStrip] SetMainMenuStrip() {
-#     $Save.add_Click( (Add-EventWrapper -Method $this.SaveToolStripMenuItem_Click) )
-#     $SettingsHandler = {
-#         $this.SettingsForm.ShowDialog($this.MainForm) | Out-Null
-#     }
-#     $Settings.add_Click( (Add-EventWrapper -ScriptBlock $SettingsHandler) )
-#     return $NewMenuStrip
-# }
-
-# [Void] SaveToolStripMenuItem_Click() {
-#     $MsgBtns = [MessageBoxButtons]::YesNo
-#     $Result = [MessageBox]::Show($this.SaveMsg, $this.SaveTitle, $MsgBtns)
-#     if ($Result -eq [DialogResult]::Yes) {
-#         $this.AgendaData | ConvertTo-Json -Depth 3 | Set-Content -Path $this.SaveDataPath
-#     }
-#     $this.IsSaved = $True
-# }

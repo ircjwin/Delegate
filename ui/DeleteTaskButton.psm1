@@ -34,13 +34,13 @@ class DeleteTaskButton: Button {
     [Void] DeleteTaskButton_Click() {
         $MainTabControl = $this.Parent.MainTabControl
         $CurrentTab = $MainTabControl.SelectedTab
-        # $CurrentIndex = $MainTabControl.SelectedIndex
+        $CurrentIndex = $this.Parent.MainTabControl.SelectedIndex
         $CurrentListView = $CurrentTab.Controls[0]
         $Checked = $CurrentListView.CheckedIndices
         for ($i = $Checked.Count - 1; $i -ge 0; $i--) {
-            # $this.AgendaData[$CurrentIndex].RemoveTaskAt($Checked[$i])
+            $this.Parent.MainTabControl.TaskListData[$CurrentIndex].RemoveTaskAt($Checked[$i])
             $CurrentListView.Items.RemoveAt($Checked[$i])
-            # $this.IsSaved = $False
+            $this.Parent.IsSaved = $False
         }
     }
 }
