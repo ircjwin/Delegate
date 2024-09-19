@@ -3,7 +3,7 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
-using module '..\src\TaskList.psm1'
+using module '..\src\TaskList.ps1'
 
 
 class AddTaskTextBox: TextBox {

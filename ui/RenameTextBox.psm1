@@ -3,7 +3,7 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
-using module '..\src\TaskList.psm1'
+using module '..\src\TaskList.ps1'
 class RenameTextBox: TextBox {
     [String] $InvalidNameTitle
     [String] $InvalidNameMsg
@@ -31,7 +31,7 @@ class RenameTextBox: TextBox {
             [MessageBox]::Show($this.InvalidNameMsg, $this.InvalidNameTitle, $MsgBtns)
             return
         }
-        foreach ($TaskList in $this.Parent.TaskListData) {
+        foreach ($TaskList in $this.Parent.MainTabControl.TaskListData) {
             if ( ($TaskList.GetName()) -eq $NewTaskListName) {
                 $MsgBtns = [MessageBoxButtons]::OK
                 [MessageBox]::Show($this.DuplicateNameMsg, $this.DuplicateNameTitle, $MsgBtns)
@@ -43,13 +43,14 @@ class RenameTextBox: TextBox {
             $this.Parent.MainTabControl.TaskListData.Add($NewTaskList)
             $this.Parent.MainTabControl.IsNew = $False
         }
-        $s.Dispose()
+        # $s.Dispose()
         $CurrentIndex = $this.Parent.MainTabControl.SelectedIndex
         $this.Parent.MainTabControl.TaskListData[$CurrentIndex].SetName($NewTaskListName)
         $this.Parent.MainTabControl.SelectedTab.Text = $NewTaskListName + $this.Parent.MainTabControl.SelectedTabWhitespace
         $this.Parent.DeleteTaskListButton.Relocate()
         $this.Parent.DeleteTaskListButton.Visible = $True
         $this.Parent.IsSaved = $False
+        $s.Dispose()
     }
 
     [Void] RenameTextBox_Leave([Object] $s, [EventArgs] $e) {
@@ -93,7 +94,8 @@ class RenameTextBox: TextBox {
             $this.Parent.IsSaved = $False
             $this.Parent.MainTabControl.IsNew = $False
         }
-        $s.Dispose()
+        # $s.Dispose()
         $this.Parent.DeleteTaskListButton.Visible = $True
+        $s.Dispose()
     }
 }

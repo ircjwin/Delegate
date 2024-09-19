@@ -3,7 +3,7 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
-using module '.\TaskList.psm1'
+using module '.\TaskList.ps1'
 
 
 function Get-TaskListData {
@@ -11,17 +11,18 @@ function Get-TaskListData {
         [Parameter()]
         [String] $DefaultName
     )
+    $bob = New-Object TaskList
     $SaveDataPath = "$($PSScriptRoot)\..\Save.json"
     $FileExists = Test-Path -Path $SaveDataPath
     If ($FileExists -eq $False) {
         $NewTaskList = New-Object TaskList
         $NewTaskList.SetName($DefaultName)
-        $NewData = [List[TaskList]]::New()
+        $NewData = [List[TaskList]]::new()
         $NewData.Add($NewTaskList)
         $NewData | ConvertTo-Json -Depth 3 | Set-Content -Path $SaveDataPath
     }
     $RawJSON = Get-Content -Path $SaveDataPath -Raw | ConvertFrom-Json
-    $NewData = [List[TaskList]]::New()
+    $NewData = [List[TaskList]]::new()
     foreach ($Object in $RawJSON) {
         try {
             $NewTaskList = [TaskList] $Object

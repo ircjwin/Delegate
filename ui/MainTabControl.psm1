@@ -4,7 +4,7 @@ using namespace System.Windows.Forms
 using namespace System.Drawing
 
 using module ".\ListViewBuilder.psm1"
-using module '..\src\TaskList.psm1'
+using module '..\src\TaskList.ps1'
 using module '.\RenameTextBox.psm1'
 
 
@@ -66,7 +66,7 @@ class MainTabControl: TabControl {
             $this.Parent.DeleteTaskListButton.Visible = $False
             $this.IsNew = $True
             $NewTabPage = New-Object TabPage
-            $NewTabPage.Text = $this.UnnamedCategory
+            $NewTabPage.Text = $this.UnnamedTabTitle
             $NewListView = New-Object ListViewBuilder($this.TabControlHeight, $this.TabControlWidth, @())
             $NewTabPage.Controls.Add($NewListView)
             # $NewTabPage.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
@@ -96,7 +96,7 @@ class MainTabControl: TabControl {
     }
 
     [Void] MainTabControl_DoubleClick() {
-        $this.DeleteTaskListButton.Visible = $False
+        $this.Parent.DeleteTaskListButton.Visible = $False
         $CurrentTab = $this.SelectedTab
         $CurrentIndex = $this.SelectedIndex
         $Rect = $this.GetTabRect($CurrentIndex)
