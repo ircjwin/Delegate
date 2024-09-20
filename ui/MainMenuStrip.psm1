@@ -28,7 +28,7 @@ class MainMenuStrip: MenuStrip {
     }
 
     [Void] SaveToolStripMenuItem_Click() {
-        $SaveDataPath = "$($PSScriptRoot)\..\Save.json"
+        $SaveDataPath = "$($PSScriptRoot)\..\src\Save.json"
         $MsgBtns = [MessageBoxButtons]::YesNo
         $Result = [MessageBox]::Show($this.SaveMsg, $this.SaveTitle, $MsgBtns)
         if ($Result -eq [DialogResult]::Yes) {

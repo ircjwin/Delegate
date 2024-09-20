@@ -51,8 +51,6 @@ class MainForm: Form {
         $this.Controls.Add($DeleteTaskButton)
         $this.Controls.Add($CheckAllButton)
         $this.Controls.Add($UncheckAllButton)
-        # $this.Controls.Add($this.SettingsForm)
-        # $this.Controls.Add($this.TaskDetailsForm)
 
         $this.add_Shown( (Add-EventWrapper -Method $this.MainForm_Shown) )
         $this.add_FormClosing( (Add-EventWrapper -Method $this.MainForm_FormClosing -SendArgs) )
@@ -88,5 +86,3 @@ class MainForm: Form {
         }
     }
 }
-
-# NewForm.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )

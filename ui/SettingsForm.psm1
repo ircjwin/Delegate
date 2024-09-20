@@ -11,7 +11,7 @@ class SettingsForm: Form {
     [AgendaSettings] $SettingsData
 
     SettingsForm() {
-        $this.SettingsPath = "$($PSScriptRoot)\Settings.json"
+        $this.SettingsPath = "$($PSScriptRoot)\..\src\Settings.json"
         $this.SettingsData = $this.GetSettings()
         $this.StartPosition = [FormStartPosition]::CenterParent
         $this.Size = New-Object Size(200, 100)

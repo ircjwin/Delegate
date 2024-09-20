@@ -11,8 +11,7 @@ function Get-TaskListData {
         [Parameter()]
         [String] $DefaultName
     )
-    $bob = New-Object TaskList
-    $SaveDataPath = "$($PSScriptRoot)\..\Save.json"
+    $SaveDataPath = "$($PSScriptRoot)\Save.json"
     $FileExists = Test-Path -Path $SaveDataPath
     If ($FileExists -eq $False) {
         $NewTaskList = New-Object TaskList

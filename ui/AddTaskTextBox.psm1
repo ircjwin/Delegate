@@ -27,7 +27,6 @@ class AddTaskTextBox: TextBox {
             $MainTabControl = $this.Parent.MainTabControl
             $CurrentTab = $MainTabControl.SelectedTab
             $TaskText = $this.Text
-            Write-Host "$($CurrentTab.Controls)"
             $CurrentListView = $CurrentTab.Controls[0]
             $CurrentListView.Items.Add($TaskText)
             $CurrentListView.AutoResizeColumn(0, "ColumnContent")

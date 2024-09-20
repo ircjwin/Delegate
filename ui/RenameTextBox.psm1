@@ -43,7 +43,6 @@ class RenameTextBox: TextBox {
             $this.Parent.MainTabControl.TaskListData.Add($NewTaskList)
             $this.Parent.MainTabControl.IsNew = $False
         }
-        # $s.Dispose()
         $CurrentIndex = $this.Parent.MainTabControl.SelectedIndex
         $this.Parent.MainTabControl.TaskListData[$CurrentIndex].SetName($NewTaskListName)
         $this.Parent.MainTabControl.SelectedTab.Text = $NewTaskListName + $this.Parent.MainTabControl.SelectedTabWhitespace
@@ -94,7 +93,6 @@ class RenameTextBox: TextBox {
             $this.Parent.IsSaved = $False
             $this.Parent.MainTabControl.IsNew = $False
         }
-        # $s.Dispose()
         $this.Parent.DeleteTaskListButton.Visible = $True
         $s.Dispose()
     }

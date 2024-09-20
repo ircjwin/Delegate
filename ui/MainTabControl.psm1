@@ -55,7 +55,6 @@ class MainTabControl: TabControl {
             $TaskDescList = $TaskList.Tasks | ForEach-Object { $_.GetDesc() }
             $NewListView = New-Object ListViewBuilder($this.TabControlHeight, $this.TabControlWidth, $TaskDescList)
             $NewTab.Controls.Add($NewListView)
-            # $NewTab.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
             $this.Controls.Add($NewTab)
         }
     }
@@ -69,7 +68,6 @@ class MainTabControl: TabControl {
             $NewTabPage.Text = $this.UnnamedTabTitle
             $NewListView = New-Object ListViewBuilder($this.TabControlHeight, $this.TabControlWidth, @())
             $NewTabPage.Controls.Add($NewListView)
-            # $NewTabPage.add_Click( (Add-EventWrapper -Method $this.BlurredControl_Click) )
             $this.TabPages.Insert( ($this.Controls.Count - 1), $NewTabPage )
             $this.SelectedTab = $NewTabPage
             $CurrentIndex = $this.SelectedIndex

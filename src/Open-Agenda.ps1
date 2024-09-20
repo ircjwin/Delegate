@@ -13,5 +13,4 @@ function Open-Agenda {
 	$App.Open()
 }
 
-Set-PSDebug -Trace 2
 Open-Agenda

@@ -26,23 +26,22 @@ class ListViewBuilder: ListView {
         if ($TaskDescList) {
             $this.Items.AddRange($TaskDescList)
         }
+        $this.add_AfterLabelEdit( (Add-EventWrapper -Method $this.ListView_AfterLabelEdit -SendArgs) )
+    }
+
+    [Void] ListView_AfterLabelEdit([Object] $s, [EventArgs] $e) {
+        if (!$e.Label) {
+            return
+        }
+        $s.Items[$e.Item].Text = $e.Label.Trim()
+        $s.AutoResizeColumn(0, "ColumnContent")
+        $CurrentTab = $this.Parent.Parent.SelectedTab
+        foreach ($TaskList in $this.Parent.Parent.TaskListData) {
+            if ( ($CurrentTab.Text.Trim()) -eq ($TaskList.GetName()) ) {
+                $TaskList.GetTasks()[$e.Item].SetDesc($e.Label.Trim())
+                $this.Parent.Parent.Parent.IsSaved = $False
+                Break
+            }
+        }
     }
 }
-
-
-# $NewListView.add_AfterLabelEdit( (Add-EventWrapper -Method $this.ListView_AfterLabelEdit -SendArgs) )
-
-# [Void] ListView_AfterLabelEdit([Object] $s, [EventArgs] $e) {
-#     $s.Items[$e.Item].Text = $e.Label.Trim()
-#     $s.AutoResizeColumn(0, "ColumnContent")
-#     $CurrentTab = $this.MainTabControl.SelectedTab
-#     foreach ($Category in $this.AgendaData) {
-#         if ( ($CurrentTab.Text.Trim()) -eq ($Category.GetName()) ) {
-#             $Category.GetTaskList()[$e.Item].SetDesc($e.Label.Trim())
-#             $this.IsSaved = $False
-#             Break
-#         }
-#     }
-#     $e.CancelEdit = $true
-#     $e.Handled = $true
-# }
