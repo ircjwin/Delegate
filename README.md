@@ -1,5 +1,6 @@
 # Delegate
 ![Static Badge](https://img.shields.io/badge/windows_powershell-5.1-steelblue?style=plastic&color=dodgerblue)
+![Static Badge](https://img.shields.io/badge/powershell-7.4.5-steelblue?style=plastic&color=mediumorchid)
 
 ## Description
 This application allows a user to write, update, save, and delete categorized task lists.
