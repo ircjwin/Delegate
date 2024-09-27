@@ -3,6 +3,7 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
+using module '.\Task.ps1'
 using module '.\TaskList.ps1'
 
 
