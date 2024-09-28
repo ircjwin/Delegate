@@ -7,3 +7,5 @@ Add-Type -AssemblyName System.Drawing
 . "$($PSScriptRoot)\src\Get-DefaultBrowser.ps1"
 . "$($PSScriptRoot)\src\Get-ChoreListData.ps1"
 . "$($PSScriptRoot)\src\Open-Agenda.ps1"
+
+Open-Agenda
