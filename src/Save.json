@@ -1,7 +1,7 @@
 [
     {
         "Name":  "General",
-        "Tasks":  [
+        "Chores":  [
                       {
                           "Desc":  "Home Alone 2",
                           "Webpage":  ""
@@ -14,7 +14,7 @@
     },
     {
         "Name":  "Food",
-        "Tasks":  [
+        "Chores":  [
                       {
                           "Desc":  "Taco",
                           "Webpage":  ""

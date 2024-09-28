@@ -4,7 +4,7 @@ using namespace System.Windows.Forms
 using namespace System.Drawing
 
 using module ".\ListViewBuilder.psm1"
-using module '..\src\TaskList.ps1'
+using module '..\src\ChoreList.ps1'
 using module '.\RenameTextBox.psm1'
 
 
@@ -18,7 +18,7 @@ class MainTabControl: TabControl {
     [string] $UnnamedTabTitle
     [string] $DefaultTabTitle
     [TabPage] $AddTabPage
-    [List[TaskList]] $TaskListData
+    [List[ChoreList]] $ChoreListData
     [Boolean] $IsNew
 
     MainTabControl([int] $FormHeight, [int] $FormWidth) {
@@ -38,7 +38,7 @@ class MainTabControl: TabControl {
         $this.AddTabPage.Text = "   +"
         $this.IsNew = $False
 
-        $this.TaskListData = (Get-TaskListData -DefaultName $this.DefaultTabTitle)
+        $this.ChoreListData = (Get-ChoreListData -DefaultName $this.DefaultTabTitle)
 
         $this.add_SelectedIndexChanged( (Add-EventWrapper -Method $this.MainTabControl_SelectedIndexChanged) )
         $this.add_Deselected( (Add-EventWrapper -Method $this.MainTabControl_Deselected -SendArgs) )
@@ -49,11 +49,11 @@ class MainTabControl: TabControl {
     }
 
     [void] TabPageBuilder() {
-        foreach ($TaskList in $this.TaskListData) {
+        foreach ($ChoreList in $this.ChoreListData) {
             $NewTab = New-Object TabPage
-            $NewTab.Text = $TaskList.GetName()
-            $TaskDescList = $TaskList.Tasks | ForEach-Object { $_.GetDesc() }
-            $NewListView = New-Object ListViewBuilder($this.TabControlHeight, $this.TabControlWidth, $TaskDescList)
+            $NewTab.Text = $ChoreList.GetName()
+            $ChoreDescList = $ChoreList.Chores | ForEach-Object { $_.GetDesc() }
+            $NewListView = New-Object ListViewBuilder($this.TabControlHeight, $this.TabControlWidth, $ChoreDescList)
             $NewTab.Controls.Add($NewListView)
             $this.Controls.Add($NewTab)
         }
@@ -62,7 +62,7 @@ class MainTabControl: TabControl {
     [Void] MainTabControl_SelectedIndexChanged() {
         $CurrentTab = $this.SelectedTab
         if ($CurrentTab -eq $this.AddTabPage) {
-            $this.Parent.DeleteTaskListButton.Visible = $False
+            $this.Parent.DeleteChoreListButton.Visible = $False
             $this.IsNew = $True
             $NewTabPage = New-Object TabPage
             $NewTabPage.Text = $this.UnnamedTabTitle
@@ -82,7 +82,7 @@ class MainTabControl: TabControl {
             $RenameTextBox.SelectAll()
         } else {
             $CurrentTab.Text = $CurrentTab.Text + $this.SelectedTabWhitespace
-            $this.Parent.DeleteTaskListButton.Relocate()
+            $this.Parent.DeleteChoreListButton.Relocate()
         }
     }
 
@@ -94,7 +94,7 @@ class MainTabControl: TabControl {
     }
 
     [Void] MainTabControl_DoubleClick() {
-        $this.Parent.DeleteTaskListButton.Visible = $False
+        $this.Parent.DeleteChoreListButton.Visible = $False
         $CurrentTab = $this.SelectedTab
         $CurrentIndex = $this.SelectedIndex
         $Rect = $this.GetTabRect($CurrentIndex)

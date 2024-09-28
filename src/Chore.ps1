@@ -1,11 +1,11 @@
 using namespace System.Collections.Generic
 
 
-class Task {
+class Chore {
 	[String] $Desc
 	[String] $Webpage
 
-	Task() {
+	Chore() {
 		$this.Desc = ""
 		$this.Webpage = ""
 	}

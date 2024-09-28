@@ -10,7 +10,7 @@ class ListViewBuilder: ListView {
     [int] $ListViewX
     [int] $ListViewY
 
-    ListViewBuilder([int] $TabControlHeight, [int] $TabControlWidth, [List[string]] $TaskDescList) {
+    ListViewBuilder([int] $TabControlHeight, [int] $TabControlWidth, [List[string]] $ChoreDescList) {
         $this.ListViewHeight = $TabControlHeight - 60
         $this.ListViewWidth = $TabControlWidth
         $this.ListViewX = 0
@@ -23,8 +23,8 @@ class ListViewBuilder: ListView {
         $this.Columns.Add("", -1)
         $this.CheckBoxes = $True
         $this.Font = New-Object Font("Segoe UI", 12, [FontStyle]::Regular)
-        if ($TaskDescList) {
-            $this.Items.AddRange($TaskDescList)
+        if ($ChoreDescList) {
+            $this.Items.AddRange($ChoreDescList)
         }
         $this.add_AfterLabelEdit( (Add-EventWrapper -Method $this.ListView_AfterLabelEdit -SendArgs) )
     }
@@ -36,9 +36,9 @@ class ListViewBuilder: ListView {
         $s.Items[$e.Item].Text = $e.Label.Trim()
         $s.AutoResizeColumn(0, "ColumnContent")
         $CurrentTab = $this.Parent.Parent.SelectedTab
-        foreach ($TaskList in $this.Parent.Parent.TaskListData) {
-            if ( ($CurrentTab.Text.Trim()) -eq ($TaskList.GetName()) ) {
-                $TaskList.GetTasks()[$e.Item].SetDesc($e.Label.Trim())
+        foreach ($ChoreList in $this.Parent.Parent.ChoreListData) {
+            if ( ($CurrentTab.Text.Trim()) -eq ($ChoreList.GetName()) ) {
+                $ChoreList.GetChores()[$e.Item].SetDesc($e.Label.Trim())
                 $this.Parent.Parent.Parent.IsSaved = $False
                 Break
             }

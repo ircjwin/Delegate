@@ -32,7 +32,7 @@ class MainMenuStrip: MenuStrip {
         $MsgBtns = [MessageBoxButtons]::YesNo
         $Result = [MessageBox]::Show($this.SaveMsg, $this.SaveTitle, $MsgBtns)
         if ($Result -eq [DialogResult]::Yes) {
-            $this.Parent.MainTabControl.TaskListData | ConvertTo-Json -Depth 3 | Set-Content -Path $SaveDataPath
+            $this.Parent.MainTabControl.ChoreListData | ConvertTo-Json -Depth 3 | Set-Content -Path $SaveDataPath
         }
         $this.Parent.IsSaved = $True
     }

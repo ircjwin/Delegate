@@ -3,7 +3,7 @@ Add-Type -AssemblyName System.Drawing
 
 . "$($PSScriptRoot)\src\Add-EventWrapper.ps1"
 . "$($PSScriptRoot)\src\Get-DefaultBrowser.ps1"
-. "$($PSScriptRoot)\src\Task.ps1"
-. "$($PSScriptRoot)\src\TaskList.ps1"
-. "$($PSScriptRoot)\src\Get-TaskListData.ps1"
+. "$($PSScriptRoot)\src\Chore.ps1"
+. "$($PSScriptRoot)\src\ChoreList.ps1"
+. "$($PSScriptRoot)\src\Get-ChoreListData.ps1"
 . "$($PSScriptRoot)\src\Open-Agenda.ps1"

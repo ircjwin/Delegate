@@ -35,8 +35,8 @@ class CheckAllButton: Button {
         $MainTabControl = $this.Parent.MainTabControl
         $CurrentTab = $MainTabControl.SelectedTab
         $CurrentListView = $CurrentTab.Controls[0]
-        foreach ($Task in $CurrentListView.Items) {
-            $Task.Checked = $True
+        foreach ($Chore in $CurrentListView.Items) {
+            $Chore.Checked = $True
         }
     }
 }

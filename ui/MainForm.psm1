@@ -4,25 +4,25 @@ using namespace System.Windows.Forms
 using namespace System.Drawing
 
 using module ".\CheckAllButton.psm1"
-using module ".\DeleteTaskButton.psm1"
+using module ".\DeleteChoreButton.psm1"
 using module ".\UncheckAllButton.psm1"
 using module ".\MainTabControl.psm1"
-using module ".\AddTaskTextBox.psm1"
+using module ".\AddChoreTextBox.psm1"
 using module ".\MainMenuStrip.psm1"
-using module ".\DeleteTaskListButton.psm1"
+using module ".\DeleteChoreListButton.psm1"
 using module '.\SettingsForm.psm1'
-using module '.\TaskDetailsForm.psm1'
+using module '.\ChoreDetailsForm.psm1'
 
 
 class MainForm: Form {
-    [AddTaskTextBox] $AddTaskTextBox
+    [AddChoreTextBox] $AddChoreTextBox
     [MainTabControl] $MainTabControl
-    [DeleteTaskListButton] $DeleteTaskListButton
+    [DeleteChoreListButton] $DeleteChoreListButton
     [String] $UnsavedTitle
     [String] $UnsavedMSg
     [Boolean] $IsSaved
     [SettingsForm] $SettingsForm
-    [TaskDetailsForm] $TaskDetailsForm
+    [ChoreDetailsForm] $ChoreDetailsForm
 
     MainForm() {
         $this.Height = 800
@@ -36,19 +36,19 @@ class MainForm: Form {
 
         $UncheckAllButton = New-Object UncheckAllButton
         $CheckAllButton = New-Object CheckAllButton
-        $DeleteTaskButton = New-Object DeleteTaskButton
+        $DeleteChoreButton = New-Object DeleteChoreButton
         $MainMenuStrip = New-Object MainMenuStrip
-        $this.DeleteTaskListButton = New-Object DeleteTaskListButton
+        $this.DeleteChoreListButton = New-Object DeleteChoreListButton
         $this.MainTabControl = New-Object MainTabControl($this.Height, $this.Width)
-        $this.AddTaskTextBox = New-Object AddTaskTextBox($this.MainTabControl.Size, $this.MainTabControl.Location)
+        $this.AddChoreTextBox = New-Object AddChoreTextBox($this.MainTabControl.Size, $this.MainTabControl.Location)
         $this.SettingsForm = New-Object SettingsForm
-        $this.TaskDetailsForm = New-Object TaskDetailsForm
+        $this.ChoreDetailsForm = New-Object ChoreDetailsForm
 
-        $this.Controls.Add($this.AddTaskTextBox)
+        $this.Controls.Add($this.AddChoreTextBox)
         $this.Controls.Add($this.MainTabControl)
-        $this.Controls.Add($this.DeleteTaskListButton)
+        $this.Controls.Add($this.DeleteChoreListButton)
         $this.Controls.Add($MainMenuStrip)
-        $this.Controls.Add($DeleteTaskButton)
+        $this.Controls.Add($DeleteChoreButton)
         $this.Controls.Add($CheckAllButton)
         $this.Controls.Add($UncheckAllButton)
 
@@ -72,7 +72,7 @@ class MainForm: Form {
             $this.MainTabControl.SelectedIndex = 0
         } else {
             $this.MainTabControl.Controls[0].Text += $this.MainTabControl.SelectedTabWhitespace
-            $this.DeleteTaskListButton.Relocate()
+            $this.DeleteChoreListButton.Relocate()
         }
     }
 

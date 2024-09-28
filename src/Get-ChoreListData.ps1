@@ -3,11 +3,11 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
-using module '.\Task.ps1'
-using module '.\TaskList.ps1'
+using module '.\Chore.ps1'
+using module '.\ChoreList.ps1'
 
 
-function Get-TaskListData {
+function Get-ChoreListData {
     param (
         [Parameter()]
         [String] $DefaultName
@@ -15,28 +15,28 @@ function Get-TaskListData {
     $SaveDataPath = "$($PSScriptRoot)\Save.json"
     $FileExists = Test-Path -Path $SaveDataPath
     If ($FileExists -eq $False) {
-        $NewTaskList = New-Object TaskList
-        $NewTaskList.SetName($DefaultName)
-        $NewData = [List[TaskList]]::new()
-        $NewData.Add($NewTaskList)
+        $NewChoreList = New-Object ChoreList
+        $NewChoreList.SetName($DefaultName)
+        $NewData = [List[ChoreList]]::new()
+        $NewData.Add($NewChoreList)
         $NewData | ConvertTo-Json -Depth 3 | Set-Content -Path $SaveDataPath
     }
     $RawJSON = Get-Content -Path $SaveDataPath -Raw | ConvertFrom-Json
-    $NewData = [List[TaskList]]::new()
+    $NewData = [List[ChoreList]]::new()
     foreach ($Object in $RawJSON) {
         try {
-            $NewTaskList = [TaskList] $Object
+            $NewChoreList = [ChoreList] $Object
         }
         catch {
-            $NewTaskList = New-Object TaskList
-            $NewTaskList.SetName($Object.Name)
-            foreach ($Task in $Object.Tasks) {
-                $Task = [Task] $Task
-                $NewTaskList.AddTask($Task)
+            $NewChoreList = New-Object ChoreList
+            $NewChoreList.SetName($Object.Name)
+            foreach ($Chore in $Object.Chores) {
+                $Chore = [Chore] $Chore
+                $NewChoreList.AddChore($Chore)
             }
         }
         finally {
-            $NewData.Add($NewTaskList)
+            $NewData.Add($NewChoreList)
         }
     }
     return $NewData

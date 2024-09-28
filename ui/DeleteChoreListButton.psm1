@@ -4,18 +4,18 @@ using namespace System.Windows.Forms
 using namespace System.Drawing
 
 
-class DeleteTaskListButton: Button {
-    [int] $DeleteTaskListButtonHeight
-    [int] $DeleteTaskListButtonWidth
+class DeleteChoreListButton: Button {
+    [int] $DeleteChoreListButtonHeight
+    [int] $DeleteChoreListButtonWidth
     [string] $DeleteCatTitle
     [string] $DeleteCatMsg
 
-    DeleteTaskListButton() {
-        $this.DeleteTaskListButtonWidth = 15
-        $this.DeleteTaskListButtonHeight = 15
-        $this.Size = New-Object Size($this.DeleteTaskListButtonWidth, $this.DeleteTaskListButtonHeight)
+    DeleteChoreListButton() {
+        $this.DeleteChoreListButtonWidth = 15
+        $this.DeleteChoreListButtonHeight = 15
+        $this.Size = New-Object Size($this.DeleteChoreListButtonWidth, $this.DeleteChoreListButtonHeight)
         $this.Text = "x"
-        $this.add_Click( (Add-EventWrapper -Method $this.DeleteTaskListButton_Click) )
+        $this.add_Click( (Add-EventWrapper -Method $this.DeleteChoreListButton_Click) )
         $this.DeleteCatTitle = "Delete"
         $this.DeleteCatMsg = "Delete list?"
     }
@@ -26,13 +26,13 @@ class DeleteTaskListButton: Button {
             $CurrentIndex = 0
         }
         $Rect = $this.Parent.MainTabControl.GetTabRect($CurrentIndex)
-        $BtnX = $Rect.Right - $this.DeleteTaskListButtonWidth + $this.Parent.MainTabControl.Left
+        $BtnX = $Rect.Right - $this.DeleteChoreListButtonWidth + $this.Parent.MainTabControl.Left
         $BtnY = $Rect.Y + $this.Parent.MainTabControl.Top
         $this.Location = New-Object Point($BtnX, $BtnY)
         $this.BringToFront()
     }
 
-    [Void] DeleteTaskListButton_Click() {
+    [Void] DeleteChoreListButton_Click() {
         $CurrentIndex = $this.Parent.MainTabControl.SelectedIndex
         $MsgBtns = [MessageBoxButtons]::YesNo
         $Result = [MessageBox]::Show($this.DeleteCatMsg, $this.DeleteCatTitle, $MsgBtns)
@@ -42,15 +42,15 @@ class DeleteTaskListButton: Button {
                 $CurrentTab.Text = $this.Parent.MainTabControl.DefaultCategory + $this.Parent.MainTabControl.SelectedTabWhitespace
                 $CurrentTab.Controls[0].Clear()
                 $this.Relocate()
-                $this.Parent.AddTaskTextBox.Select()
-                $this.Parent.MainTabControl.TaskListData[0].SetName($this.Parent.MainTabControl.DefaultTabTitle)
-                $this.Parent.MainTabControl.TaskListData[0].ClearTasks()
+                $this.Parent.AddChoreTextBox.Select()
+                $this.Parent.MainTabControl.ChoreListData[0].SetName($this.Parent.MainTabControl.DefaultTabTitle)
+                $this.Parent.MainTabControl.ChoreListData[0].ClearChores()
             } else {
                 if ($CurrentIndex -gt 0) {
                     $this.Parent.MainTabControl.SelectedIndex = ($CurrentIndex - 1)
                 }
                 $this.Parent.MainTabControl.Controls.RemoveAt($CurrentIndex)
-                $this.Parent.MainTabControl.TaskListData.RemoveAt($CurrentIndex)
+                $this.Parent.MainTabControl.ChoreListData.RemoveAt($CurrentIndex)
             }
             $this.Parent.IsSaved = $False
         }

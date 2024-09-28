@@ -35,8 +35,8 @@ class UncheckAllButton: Button {
         $MainTabControl = $this.Parent.MainTabControl
         $CurrentTab = $MainTabControl.SelectedTab
         $CurrentListView = $CurrentTab.Controls[0]
-        foreach ($Task in $CurrentListView.Items) {
-            $Task.Checked = $False
+        foreach ($Chore in $CurrentListView.Items) {
+            $Chore.Checked = $False
         }
     }
 }

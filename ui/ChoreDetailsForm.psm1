@@ -4,12 +4,12 @@ using namespace System.Windows.Forms
 using namespace System.Drawing
 
 
-class TaskDetailsForm: Form {
-    TaskDetailsForm() {
+class ChoreDetailsForm: Form {
+    ChoreDetailsForm() {
         $this.StartPosition = [FormStartPosition]::CenterParent
         $this.Size = New-Object Size(400, 200)
         $this.Location = New-Object Point(0, 0)
-        $this.Text = "Task Details"
+        $this.Text = "Chore Details"
 
         $NewLabel = New-Object Label
         $NewLabel.Width = 200
