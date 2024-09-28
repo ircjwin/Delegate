@@ -3,8 +3,7 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
-using module '.\Chore.ps1'
-using module '.\ChoreList.ps1'
+using module '.\ChoreList.psm1'
 
 
 function Get-ChoreListData {

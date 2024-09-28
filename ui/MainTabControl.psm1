@@ -4,7 +4,7 @@ using namespace System.Windows.Forms
 using namespace System.Drawing
 
 using module ".\ListViewBuilder.psm1"
-using module '..\src\ChoreList.ps1'
+using module '..\src\ChoreList.psm1'
 using module '.\RenameTextBox.psm1'
 
 
