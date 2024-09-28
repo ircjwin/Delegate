@@ -13,5 +13,5 @@ function Open-Agenda {
 	$App.Open()
 }
 
-Get-Command
+Get-Command -ListImported
 Open-Agenda
