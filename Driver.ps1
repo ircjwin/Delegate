@@ -1,5 +1,5 @@
-Set-PSDebug -Trace 2
-
+# Set-PSDebug -Trace 2
+Write-Host $PSScriptRoot
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
