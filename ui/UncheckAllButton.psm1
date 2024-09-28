@@ -27,7 +27,7 @@ class UncheckAllButton: Button {
         $this.ImageList.ImageSize = New-Object Size( ($this.SideButtonWidth - 10), ($this.SideButtonHeight - 10) )
         $this.ImageList.Images.Add($NewImage)
         $this.ImageIndex = 0
-
+        Get-Command -ListImported
         $this.add_Click( (Add-EventWrapper -Method $this.UncheckButton_Click) )
     }
 
