@@ -3,6 +3,7 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
+Get-Command -ListImported
 
 class UncheckAllButton: Button {
     [int] $SideButtonHeight
@@ -27,7 +28,7 @@ class UncheckAllButton: Button {
         $this.ImageList.ImageSize = New-Object Size( ($this.SideButtonWidth - 10), ($this.SideButtonHeight - 10) )
         $this.ImageList.Images.Add($NewImage)
         $this.ImageIndex = 0
-        Get-Command -ListImported
+
         $this.add_Click( (Add-EventWrapper -Method $this.UncheckButton_Click) )
     }
 
