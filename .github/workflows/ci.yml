@@ -13,9 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Install PowerShell 7
-        uses: actions/setup-powershell@v2
-        with:
-          version: 7
       - name: Build PowerShell app
-        run: pwsh -File ". ./Driver.ps1"
+        run: . ./Driver.ps1
+        shell: powershell
