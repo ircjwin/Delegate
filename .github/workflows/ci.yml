@@ -14,5 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build PowerShell app
-        run: . ./Driver.ps1
-        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          . ./Driver.ps1
+          shell: powershell
