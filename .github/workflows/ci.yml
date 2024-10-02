@@ -13,6 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet
       - name: Build PowerShell app
         run: |
           . ./Driver.ps1

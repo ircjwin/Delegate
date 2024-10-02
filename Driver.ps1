@@ -4,7 +4,9 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
 $MF = New-Object System.Windows.Forms.Form
-$MF.SHowDialog()
+$MF.ShowDialog()
+Write-Host "Exited out of ShowDialog()"
+$MF.Dispose()
 
 # . "$($PSScriptRoot)\src\Add-EventWrapper.ps1"
 # . "$($PSScriptRoot)\src\Get-DefaultBrowser.ps1"
