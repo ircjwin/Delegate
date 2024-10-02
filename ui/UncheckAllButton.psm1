@@ -3,7 +3,6 @@ using namespace System.Management.Automation
 using namespace System.Windows.Forms
 using namespace System.Drawing
 
-Get-Command -ListImported
 
 class UncheckAllButton: Button {
     [int] $SideButtonHeight
