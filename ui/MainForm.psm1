@@ -57,9 +57,26 @@ class MainForm: Form {
     }
 
     [Void] Open() {
-        $this.ShowDialog()
-        $this.SettingsForm.Dispose()
-        $this.Dispose()
+        try {
+            try {
+                $this.ShowDialog()
+            } catch {
+                exit 1
+            }
+            try {
+                $this.SettingsForm.Dispose()
+            } catch {
+                exit 1
+            }
+            try {
+                $this.Dispose()
+            } catch {
+                exit 1
+            }
+            exit 0
+        } catch {
+            exit 1
+        }
     }
 
     [Void] MainForm_Shown() {
