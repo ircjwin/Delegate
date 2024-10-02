@@ -1,5 +1,5 @@
 Set-PSDebug -Trace 2
-
+$ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
