@@ -57,7 +57,7 @@ class MainForm: Form {
     }
 
     [Void] Open() {
-        $this.ShowDialog() | Out-Null
+        $this.ShowDialog()
         $this.SettingsForm.Dispose()
         $this.Dispose()
     }
