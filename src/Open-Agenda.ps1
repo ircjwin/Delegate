@@ -1,6 +1,5 @@
 using module "..\ui\MainForm.psm1"
 
-
 function Open-Agenda {
 <#
 .SYNOPSIS
@@ -13,5 +12,4 @@ function Open-Agenda {
 	$App.Open()
 }
 
-# Get-Command -ListImported
 Open-Agenda
