@@ -12,6 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@v4
       - name: Install PSScriptAnalyzer module
         shell: pwsh
         run: |
