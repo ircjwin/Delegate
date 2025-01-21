@@ -4,6 +4,7 @@
 
 ## Description
 **NOTE:** This application is deprecated. I will likely rebuild using C# and WPF as a fresh project
+
 This application allows a user to write, update, save, and delete categorized task lists.
 
 Key features include:
