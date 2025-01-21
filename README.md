@@ -3,6 +3,7 @@
 ![Static Badge](https://img.shields.io/badge/powershell-7.4.5-steelblue?style=plastic&color=mediumorchid)
 
 ## Description
+**NOTE:** This application is deprecated. I will likely rebuild using C# and WPF as a fresh project
 This application allows a user to write, update, save, and delete categorized task lists.
 
 Key features include:
