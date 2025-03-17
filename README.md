@@ -2,6 +2,8 @@
 ![Static Badge](https://img.shields.io/badge/windows_powershell-5.1-steelblue?style=plastic&color=dodgerblue)
 ![Static Badge](https://img.shields.io/badge/powershell-7.4.5-steelblue?style=plastic&color=mediumorchid)
 
+Rewritten in C#/WPF as [Piles](https://github.com/ircjwin/Piles)
+
 ## Description
 **NOTE:** This application is deprecated. I will likely rebuild using C# and WPF as a fresh project
 
